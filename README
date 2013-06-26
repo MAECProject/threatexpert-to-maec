@@ -35,8 +35,8 @@ terms.txt: the terms of use for this script.
 --Dependencies------------------------------------------------------------------
 There are three dependencies for this script:
 1) The Python lxml library >= 3.2.x, http://lxml.de/
-2) The python-maec library: https://github.com/MAECProject/python-maec
-3) The python-cybox library: https://github.com/CybOXProject/python-cybox  
+2) The python-maec library, v4.0.0b1: https://github.com/MAECProject/python-maec/tree/v4.0.0b1
+3) The python-cybox library, v2.0.0b4: https://github.com/CybOXProject/python-cybox/tree/v2.0.0b4 
 --------------------------------------------------------------------------------
 --Usage Notes-------------------------------------------------------------------
 
