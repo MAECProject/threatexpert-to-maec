@@ -13,10 +13,10 @@ For more information, please refer to the terms.txt file.
 
 #################################################################
 #Generates MAEC Package Output from a ThreatExpert XML file     #
-#Compatible with MAEC Schema v4.0 & CybOX 2.0                   #
+#Compatible with MAEC Schema v4.0.1 & CybOX 2.0.1               #
 #                                                               #
-#v0.92 - BETA                                                   #
-#Update 6/21/2013                                               #
+#v0.93 - BETA                                                   #
+#Updated 10/16/2013                                             #
 #Andrew Sillers & Ivan Kirillov, MITRE                          #
 #                                                               #
 #################################################################
@@ -35,8 +35,8 @@ terms.txt: the terms of use for this script.
 --Dependencies------------------------------------------------------------------
 There are three dependencies for this script:
 1) The Python lxml library >= 3.2.x, http://lxml.de/
-2) The python-maec library, v4.0.0b1: https://github.com/MAECProject/python-maec/tree/v4.0.0b1
-3) The python-cybox library, v2.0.0b4: https://github.com/CybOXProject/python-cybox/tree/v2.0.0b4 
+2) The python-maec library, v4.0.1: https://pypi.python.org/pypi/maec
+3) The python-cybox library, v2.0.1: https://pypi.python.org/pypi/cybox/2.0.1.1
 --------------------------------------------------------------------------------
 --Usage Notes-------------------------------------------------------------------
 
