@@ -353,7 +353,7 @@ class parser:
                     action_attributes['associated_objects'] = [associated_object_dict]
                     fs_action = MalwareAction.from_dict(action_attributes)
                     self.actions.get('File Actions').append(fs_action)
-                    self.subreport_actions.append(fs_action.id)
+                    self.subreport_actions.append(fs_action.id_)
 
     def __process_filenames_notes_type(self, filenames_notes, type):
         if filenames_notes.get_filenames_collection() is not None:
@@ -379,7 +379,7 @@ class parser:
                 action_attributes['associated_objects'] = [associated_object_dict]
                 fs_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('File Actions').append(fs_action)
-                self.subreport_actions.append(fs_action.id)
+                self.subreport_actions.append(fs_action.id_)
 
     def __process_dirnames_notes_type(self, dirnames_notes, type):
         if dirnames_notes.get_dirnames_collection() is not None:
@@ -405,7 +405,7 @@ class parser:
                 action_attributes['associated_objects'] = [associated_object_dict]
                 fs_action = self.maec_action.create_action(action_attributes)
                 self.actions.get('File Actions').append(fs_action)
-                self.subreport_actions.append(fs_action.id)
+                self.subreport_actions.append(fs_action.id_)
 
     def __process_added_processes_type(self, added_processes):
         if added_processes.get_added_processes_collection() is not None:
@@ -451,7 +451,7 @@ class parser:
                 action_attributes['tool_id'] = self.tool_id
                 process_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('Process Actions').append(process_action)
-                self.subreport_actions.append(process_action.id)
+                self.subreport_actions.append(process_action.id_)
 
     def __process_added_hidden_processes_type(self, added_hidden_processes):
         if added_hidden_processes.get_added_hidden_processes_collection() is not None:
@@ -477,7 +477,7 @@ class parser:
                 action_attributes['tool_id'] = self.tool_id
                 process_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('Process Actions').append(process_action)
-                self.subreport_actions.append(process_action.id)
+                self.subreport_actions.append(process_action.id_)
                 
     def __process_injected_mempages_type(self, injected_mempages):
         for mempage in injected_mempages.get_injected_mempages_collection().get_injected_mempage():
@@ -507,7 +507,7 @@ class parser:
             action_attributes['tool_id'] = self.tool_id #static
             memory_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('Memory Actions').append(memory_action)
-            self.subreport_actions.append(memory_action.id)
+            self.subreport_actions.append(memory_action.id_)
 
     #Revisit
     def __process_added_modules_type(self, added_modules):
@@ -531,7 +531,7 @@ class parser:
                 action_attributes['tool_id'] = self.tool_id
                 module_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('Module Actions').append(module_action)
-                self.subreport_actions.append(module_action.id)
+                self.subreport_actions.append(module_action.id_)
 
     def __process_added_services_type(self, added_services):
         if added_services.get_added_services_collection() is not None:
@@ -559,7 +559,7 @@ class parser:
                 action_attributes['tool_id'] = self.tool_id
                 service_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('Service Actions').append(service_action)
-                self.subreport_actions.append(service_action.id)
+                self.subreport_actions.append(service_action.id_)
 
     def __process_modified_services_type(self, modified_services):
         if modified_services.get_modified_services_collection() is not None:
@@ -586,7 +586,7 @@ class parser:
                 action_attributes['tool_id'] = self.tool_id
                 service_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('Service Actions').append(service_action)
-                self.subreport_actions.append(service_action.id)
+                self.subreport_actions.append(service_action.id_)
 
     def __process_added_drivers_type(self, added_drivers): #stub
         if added_drivers.get_added_drivers_collection() is not None:
@@ -608,7 +608,7 @@ class parser:
                 action_attributes['tool_id'] = self.tool_id
                 hook_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('Driver Actions').append(hook_action)
-                self.subreport_actions.append(hook_action.id)
+                self.subreport_actions.append(hook_action.id_)
 
     def __process_added_syscallhooks_type(self, added_syscallhooks):
         if added_syscallhooks.get_added_syscallhooks_collection() is not None:
@@ -630,7 +630,7 @@ class parser:
                 action_attributes['tool_id'] = self.tool_id
                 hook_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('System Actions').append(hook_action)
-                self.subreport_actions.append(hook_action.id)
+                self.subreport_actions.append(hook_action.id_)
     
     def __process_regkeys_type(self, regkeys, type):
         for regkey in regkeys.get_regkey():
@@ -660,7 +660,7 @@ class parser:
             action_attributes['tool_id'] = self.tool_id
             reg_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('Registry Actions').append(reg_action)
-            self.subreport_actions.append(reg_action.id)
+            self.subreport_actions.append(reg_action.id_)
 
     def __process_regvalues_structures_type(self, regvalues, type):
         if regvalues.get_regvalues_structure() is not None:
@@ -710,7 +710,7 @@ class parser:
                     action_attributes['tool_id'] = self.tool_id
                     reg_action = MalwareAction.from_dict(action_attributes)
                     self.actions.get('Registry Actions').append(reg_action)
-                    self.subreport_actions.append(reg_action.id)
+                    self.subreport_actions.append(reg_action.id_)
 
     def __process_mutexes_type(self, mutexes):
         for mutex in mutexes.get_mutex():
@@ -730,7 +730,7 @@ class parser:
             action_attributes['tool_id'] = self.tool_id
             mutex_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('IPC Actions').append(mutex_action)
-            self.subreport_actions.append(mutex_action.id)
+            self.subreport_actions.append(mutex_action.id_)
 
     def __process_open_ports_type(self, openports):
         if openports.get_open_ports_collection() is not None:
@@ -753,7 +753,7 @@ class parser:
                 action_attributes['tool_id'] = self.tool_id
                 port_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('Network Actions').append(port_action)
-                self.subreport_actions.append(port_action.id)
+                self.subreport_actions.append(port_action.id_)
 
     def __process_gethostbyname_api_type(self, hosts):
         for host in hosts.get_host():
@@ -774,7 +774,7 @@ class parser:
             action_attributes['tool_id'] = self.tool_id
             host_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('Network Actions').append(host_action)
-            self.subreport_actions.append(host_action.id)
+            self.subreport_actions.append(host_action.id_)
 
     def __process_connect_ip_api_type(self, connect_ips):
         for connect_ip in connect_ips.get_connect_ip():
@@ -804,7 +804,7 @@ class parser:
             action_attributes['tool_id'] = self.tool_id #static
             connect_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('Network Actions').append(connect_action)
-            self.subreport_actions.append(connect_action.id)
+            self.subreport_actions.append(connect_action.id_)
     
     def __process_internetconnect_api_type(self, internetconnects):
         for internetconnect in internetconnects.get_internetconnect():
@@ -833,7 +833,7 @@ class parser:
             action_attributes['tool_id'] = self.tool_id #static
             internet_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('Network Actions').append(internet_action)
-            self.subreport_actions.append(internet_action.id)
+            self.subreport_actions.append(internet_action.id_)
 
     def __process_getrequests_type(self, requests, internetconnects):
         for internetconnect in internetconnects.get_internetconnect():
@@ -862,7 +862,7 @@ class parser:
                 action_attributes['tool_id'] = self.tool_id #static
                 internet_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('Network Actions').append(internet_action)
-                self.subreport_actions.append(internet_action.id)
+                self.subreport_actions.append(internet_action.id_)
         
 
     def __process_urls_type(self, urls, type):
@@ -887,7 +887,7 @@ class parser:
             action_attributes['tool_id'] = self.tool_id
             url_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('Network Actions').append(url_action)
-            self.subreport_actions.append(url_action.id)
+            self.subreport_actions.append(url_action.id_)
 
     def __process_urldownloadtofile_api_type(self, urldownloadtofile):
         if urldownloadtofile.get_urldownloadtofile_collection() is not None:
@@ -920,7 +920,7 @@ class parser:
                 action_attributes['tool_id'] = self.tool_id
                 url_file_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('Network Actions').append(url_file_action)
-                self.subreport_actions.append(url_file_action.id)
+                self.subreport_actions.append(url_file_action.id_)
 
     def __process_setwindowshook_api_type(self, windowshooks):
         windows_hooks_collection = windowshooks.get_setwindowshook_collection()
@@ -947,7 +947,7 @@ class parser:
             action_attributes['tool_id'] = self.tool_id
             hook_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('System Actions').append(hook_action)
-            self.subreport_actions.append(hook_action.id)
+            self.subreport_actions.append(hook_action.id_)
     
     def __process_wnetaddconnection_api_type(self, wnetaddconnections):
         for wnetaddconnection in wnetaddconnections:
@@ -986,7 +986,7 @@ class parser:
             action_attributes['tool_id'] = self.tool_id
             process_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('Process Actions').append(process_action)
-            self.subreport_actions.append(process_action.id)
+            self.subreport_actions.append(process_action.id_)
     
     def __get_av_aliases(self, object):
         av_classification_objects = [] 
