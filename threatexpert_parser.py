@@ -968,15 +968,16 @@ class parser:
             action_attributes['tool_id'] = self.tool_id
             connect_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('Network Actions').append(connect_action)
-            self.subreport_actions.append(connect_action.get_id())
+            self.subreport_actions.append(connect_action.id_)
     
     def __process_procnames_to_terminate_type(self, procnames):
         for procname in procnames.get_procname():
             process_attributes = {}
             process_attributes['xsi:type'] = "ProcessObjectType"
             process_attributes['name'] = { 'value' : procname, 'force_datatype' : True }
+            associated_object_dict = { 'id' : self.generator.generate_object_id() }
             associated_object_dict['properties'] = process_attributes
-            associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
+            associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
 
             # Create the action
             action_attributes = {}
