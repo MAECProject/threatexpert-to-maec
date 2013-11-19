@@ -299,7 +299,6 @@ class parser:
             files_collection = added_files.get_added_files_collection()
             for file_object in files_collection.get_added_file():
                 file_attributes = {}
-                associated_object_dict = { 'id' : self.generator.generate_object_id() }
                 
                 file_size = file_object.get_filesize() 
                 if file_size != None: file_attributes['size_in_bytes'] = file_size
@@ -327,18 +326,18 @@ class parser:
                 # TODO: attach aliases to files that have them
                 #associated_object_dict['domain-specific_object_attributes'] = self.__get_av_aliases(file_object)
 
-                for filename in filenames.get_filename():                    
+                for filename in filenames.get_filename():
+                    associated_object_dict = {}                    
                     if 'sample #1]' in filename:
                         associated_object_dict['idref'] = self.subject_id_list[0]
                     else:
+                        associated_object_dict['id'] = self.generator.generate_object_id() 
+                        fully_qualified = True
+                        if "%" in filename:
+                            fully_qualified = False
                         file_attributes['xsi:type'] = "FileObjectType"
-                        file_attributes['file_path'] = { 'value' : filename, 'fully_qualified' : False }
-                        
-                        if type == 'file':
-                            file_attributes['type'] = 'File'
-                        elif type == 'stream':
-                            file_attributes['type'] = 'Other' 
-                            
+                        file_attributes['file_path'] = { 'value' : filename, 'fully_qualified' : fully_qualified }
+                         
                         associated_object_dict['properties'] = file_attributes
                         associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
                     
