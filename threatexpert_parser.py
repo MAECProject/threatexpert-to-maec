@@ -18,6 +18,7 @@ from cybox.core.associated_object import AssociatedObject
 from cybox.common.tools import ToolInformation
 import threatexpert
 import traceback
+import re
 
 class parser:
     
@@ -46,6 +47,7 @@ class parser:
         self.analysis_subject_path = None
         self.analysis_subject_name = None
         self.subject_id_list = []
+        self.ip_regex = re.compile('^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$')
         
     #"Public" methods
     
@@ -733,18 +735,28 @@ class parser:
     def __process_gethostbyname_api_type(self, hosts):
         for host in hosts.get_host():
             host_attributes = {}
+            action_attributes = {}
             associated_object_dict = { 'id' : self.generator.generate_object_id() }
             
-            host_attributes['xsi:type'] = 'URIObjectType'
-            host_attributes['value'] = { 'value' : host, 'force_datatype' : True }
-            
+            #Determine if we're dealing with an IP address or URL
+            if self.ip_regex.match(host):
+                host_attributes['xsi:type'] = 'AddressObjectType'
+                host_attributes['address_value'] = host
+                if ':' in host:
+                    host_attributes['category'] = 'ipv6-addr'
+                else:
+                    host_attributes['category'] = 'ipv4-addr'
+                action_attributes['name'] = {'value' : 'get host by address', 'xsi:type' : 'maecVocabs:SocketActionNameVocab-1.0'}
+            else:
+                host_attributes['xsi:type'] = 'URIObjectType'
+                host_attributes['value'] = { 'value' : host, 'force_datatype' : True }
+                action_attributes['name'] = {'value' : 'get host by name', 'xsi:type' : 'maecVocabs:SocketActionNameVocab-1.0'}
+
             associated_object_dict['properties'] = host_attributes
             associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
             
-            #Generate the MAEC action
-            action_attributes = {}
+            #Generate the MAEC action           
             action_attributes['id'] = self.generator.generate_malware_action_id()
-            action_attributes['name'] = {'value' : 'get host by name', 'xsi:type' : 'maecVocabs:SocketActionNameVocab-1.0'}
             action_attributes['associated_objects'] = [associated_object_dict]
             host_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('Network Actions').append(host_action)
@@ -754,26 +766,32 @@ class parser:
         for connect_ip in connect_ips.get_connect_ip():
             first_associated_object_dict = { 'id' : self.generator.generate_object_id() }
             second_associated_object_dict = { 'id' : self.generator.generate_object_id() }
-            
+            action_attributes = {}
+
+            #Determine if we're dealing with an IP address or URL
             ip_attributes = {}
-            ip_attributes['xsi:type'] = 'AddressObjectType'
-            ip_attributes['address_value'] = { 'value' : connect_ip.get_ip(), 'force_datatype' : True }
-            if ':' in connect_ip.get_ip():
-                ip_attributes['category'] = 'ipv6-addr'
+            if self.ip_regex.match(connect_ip.get_ip()):
+                ip_attributes['xsi:type'] = 'AddressObjectType'
+                ip_attributes['address_value'] = connect_ip.get_ip()
+                if ':' in connect_ip.get_ip():
+                    ip_attributes['category'] = 'ipv6-addr'
+                else:
+                    ip_attributes['category'] = 'ipv4-addr'
+                first_associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
+                action_attributes['name'] = {'value' : 'connect to ip', 'xsi:type' : 'maecVocabs:NetworkActionNameVocab-1.0'}
             else:
-                ip_attributes['category'] = 'ipv4-addr'
+                ip_attributes['xsi:type'] = 'URIObjectType'
+                ip_attributes['value'] = { 'value' : connect_ip.get_ip(), 'force_datatype' : True }
+                action_attributes['name'] = {'value' : 'connect to url', 'xsi:type' : 'maecVocabs:NetworkActionNameVocab-1.0'}
             first_associated_object_dict['properties'] = ip_attributes
-            first_associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
-            
+
             port_attributes = {}
             port_attributes['xsi:type'] = 'PortObjectType'
             port_attributes['port_value'] = { 'value' : connect_ip.get_port_number(), 'force_datatype' : True }
             second_associated_object_dict['properties'] = port_attributes
             second_associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
-            
-            action_attributes = {}
+
             action_attributes['id'] = self.generator.generate_malware_action_id()
-            action_attributes['name'] = {'value' : 'connect to ip', 'xsi:type' : 'maecVocabs:NetworkActionNameVocab-1.0'}
             action_attributes['associated_objects'] = [first_associated_object_dict, second_associated_object_dict]
             connect_action = MalwareAction.from_dict(action_attributes)
             self.actions.get('Network Actions').append(connect_action)
