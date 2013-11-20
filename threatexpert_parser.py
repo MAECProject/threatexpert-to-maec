@@ -821,7 +821,7 @@ class parser:
                                                             }             
                                                         }}
                 session_attributes['xsi:type'] = 'HTTPSessionObjectType'
-                session_attributes['http_request_responses'] = [{'http_request_response' : request_attributes }]
+                session_attributes['http_request_response'] = [{'http_client_request' : request_attributes }]
                 
                 associated_object_dict['properties'] = session_attributes
                 associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
@@ -834,7 +834,6 @@ class parser:
                 internet_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('Network Actions').append(internet_action)
                 self.subreport_actions.append(internet_action.id_)
-        
 
     def __process_urls_type(self, urls, type):
         for url in urls.get_url():
