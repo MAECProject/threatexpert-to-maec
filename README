@@ -15,8 +15,8 @@ For more information, please refer to the terms.txt file.
 #Generates MAEC Package Output from a ThreatExpert XML file     #
 #Compatible with MAEC Schema v4.0.1 & CybOX 2.0.1               #
 #                                                               #
-#v0.93 - BETA                                                   #
-#Updated 10/16/2013                                             #
+#v0.94 - BETA                                                   #
+#Updated 11/20/2013                                             #
 #Andrew Sillers & Ivan Kirillov, MITRE                          #
 #                                                               #
 #################################################################
