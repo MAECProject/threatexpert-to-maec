@@ -15,7 +15,7 @@
 #ThreatExpert Converter Script
 #Copyright 2012, MITRE Corp
 #Andrew Sillers & Ivan Kirillov, MITRE
-#v0.93 - BETA
+#v0.94 - BETA
 #Generates valid MAEC v4.0.1/CybOX v2.0.1 draft content
 
 import threatexpert_parser as teparser
@@ -68,7 +68,7 @@ def usage():
     
 USAGE_TEXT = """
 ThreatExpert XML Output --> MAEC XML Converter Utility
-v0.93 BETA // Supports MAEC v4.0.1 and CybOX v2.0.1
+v0.94 BETA // Supports MAEC v4.0.1 and CybOX v2.0.1
 
 Usage: python threatexpert_to_maec.py <special arguments> -i <input threatexpert xml output> -o <output maec xml file> 
        OR python threatexpert_to_maec.py <special arguments> -d <directory>
