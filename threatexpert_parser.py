@@ -826,32 +826,33 @@ class parser:
             self.subreport_actions.append(internet_action.id_)
 
     def __process_getrequests_type(self, requests, internetconnects):
-        for internetconnect in internetconnects.get_internetconnect():
-            for request in requests.get_request():
-                session_attributes = {}
-                request_attributes = {}
-                associated_object_dict = { 'id' : self.generator.generate_object_id() }
-                request_attributes['http_request_line'] = { 'http_method' : { 'value' : 'GET', 'force_datatype' : True }, 'value' : request }
-                request_attributes['http_request_header'] = { 'parsed_header' : {
-                                                            'host' : {
-                                                                'domain_name' : { 'value' : internetconnect.get_server(), 'force_datatype' : True },
-                                                                'port' : { 'port_value' : { 'value' : 80, 'force_datatype' : True }, 'xsi:type' : 'PortObjectType' }
-                                                            }             
-                                                        }}
-                session_attributes['xsi:type'] = 'HTTPSessionObjectType'
-                session_attributes['http_request_response'] = [{'http_client_request' : request_attributes }]
-                
-                associated_object_dict['properties'] = session_attributes
-                associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
-                
-                #create the action (that operated on the object)
-                action_attributes = {}
-                action_attributes['id'] = self.generator.generate_malware_action_id()
-                action_attributes['name'] = {'value' : 'send http get request', 'xsi:type' : 'maecVocabs:HTTPActionNameVocab-1.0'}
-                action_attributes['associated_objects'] = [associated_object_dict]
-                internet_action = MalwareAction.from_dict(action_attributes)
-                self.actions.get('Network Actions').append(internet_action)
-                self.subreport_actions.append(internet_action.id_)
+        if internetconnects is not None:
+            for internetconnect in internetconnects.get_internetconnect():
+                for request in requests.get_request():
+                    session_attributes = {}
+                    request_attributes = {}
+                    associated_object_dict = { 'id' : self.generator.generate_object_id() }
+                    request_attributes['http_request_line'] = { 'http_method' : { 'value' : 'GET', 'force_datatype' : True }, 'value' : request }
+                    request_attributes['http_request_header'] = { 'parsed_header' : {
+                                                                'host' : {
+                                                                    'domain_name' : { 'value' : internetconnect.get_server(), 'force_datatype' : True },
+                                                                    'port' : { 'port_value' : { 'value' : 80, 'force_datatype' : True }, 'xsi:type' : 'PortObjectType' }
+                                                                }             
+                                                            }}
+                    session_attributes['xsi:type'] = 'HTTPSessionObjectType'
+                    session_attributes['http_request_response'] = [{'http_client_request' : request_attributes }]
+                    
+                    associated_object_dict['properties'] = session_attributes
+                    associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
+                    
+                    #create the action (that operated on the object)
+                    action_attributes = {}
+                    action_attributes['id'] = self.generator.generate_malware_action_id()
+                    action_attributes['name'] = {'value' : 'send http get request', 'xsi:type' : 'maecVocabs:HTTPActionNameVocab-1.0'}
+                    action_attributes['associated_objects'] = [associated_object_dict]
+                    internet_action = MalwareAction.from_dict(action_attributes)
+                    self.actions.get('Network Actions').append(internet_action)
+                    self.subreport_actions.append(internet_action.id_)
 
     def __process_urls_type(self, urls, type):
         for url in urls.get_url():
