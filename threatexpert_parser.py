@@ -65,8 +65,24 @@ class parser:
     #Extract processes, actions, and information about the analysis subject
     def parse_document(self):
         id_map = {}
+        
+        # use the first available MD5 hash in the generator namespace
+        id_namespace = None
+        subreports = self.report_object.get_subreports()
+        for subreport in subreports.get_subreport():
+            submission_summary = subreport.get_submission_summary()
+            if submission_summary is not None:
+                submission_details = submission_summary.get_submission_details()
+                if submission_details is not None:
+                    sample_info_coll = submission_details.get_sample_info_collection()
+                    if sample_info_coll is not None:
+                        sample_info = sample_info_coll.get_sample_info()
+                        id_namespace = sample_info[0].get_md5()
+                        if id_namespace is not None:
+                            break
+        
         #Setup the generator
-        self.generator = Generator('threatexpert_to_maec')
+        self.generator = Generator('threatexpert_to_maec_' + id_namespace)
         
         #Get the subreports
         subreports = self.report_object.get_subreports()
