@@ -176,12 +176,12 @@ class parser:
         if md5 != None or sha1 != None:
             hashes = []
             if md5 != None:
-                hash_dict =  {'type' : {'value' :'MD5', 'datatype' : 'string', 'force_datatype' : True},
+                hash_dict =  {'type' : {'value' :'MD5', 'datatype' : 'string' },
                               'simple_hash_value': {'value' : md5}
                              }
                 hashes.append(hash_dict)
             if sha1 != None:
-                hash_dict =  {'type' : {'value' :'SHA1', 'datatype' : 'string', 'force_datatype' : True},
+                hash_dict =  {'type' : {'value' :'SHA1', 'datatype' : 'string' },
                               'simple_hash_value': {'value' : sha1}
                              }
                 hashes.append(hash_dict)
@@ -319,12 +319,12 @@ class parser:
                 if md5 != None or sha1 != None:
                     hashes = []
                     if md5 != None:
-                        hash_dict =  {'type' : {'value' :'MD5', 'datatype' : 'string', 'force_datatype' : True},
+                        hash_dict =  {'type' : {'value' :'MD5', 'datatype' : 'string' },
                                       'simple_hash_value': {'value' : md5}
                                      }
                         hashes.append(hash_dict)
                     if sha1 != None:
-                        hash_dict =  {'type' : {'value' :'SHA1', 'datatype' : 'string', 'force_datatype' : True},
+                        hash_dict =  {'type' : {'value' :'SHA1', 'datatype' : 'string' },
                                       'simple_hash_value': {'value' : sha1}
                                      }
                         hashes.append(hash_dict)
@@ -395,7 +395,7 @@ class parser:
                 dir_attributes = {}
                 associated_object_dict = { 'id' : self.generator.generate_object_id() }
                 file_attributes['xsi:type'] = "FileObjectType"
-                dir_attributes['file_path'] = { 'value' : dirname, 'force_datatype' : True }
+                dir_attributes['file_path'] = { 'value' : dirname }
                 
                 associated_object_dict['properties'] = dir_attibutes
                 associated_object_dict['association_type'] = 'Affected'
@@ -430,8 +430,8 @@ class parser:
                 process_attributes['image_info'] = {}
                 if process.get_process_filename() == '[file and pathname of the sample #1]':
                     if self.analysis_subject_path is not None:
-                        process_attributes['image_info']['path'] = { 'value' : self.analysis_subject_path + '\\' + self.analysis_subject_name, 'force_datatype' : True }
-                        process_attributes['image_info']['file_name'] = { 'value' : self.analysis_subject_name, 'force_datatype' : True }
+                        process_attributes['image_info']['path'] = { 'value' : self.analysis_subject_path + '\\' + self.analysis_subject_name }
+                        process_attributes['image_info']['file_name'] = { 'value' : self.analysis_subject_name }
                     else:
                         # HACK: we need to refer to the unnamed malware analysis subject,
                         # HACK: but there is no way for a Process element to refer to a File element (only file *names*)
@@ -666,7 +666,6 @@ class parser:
             for regvalue in reg_values:
                 regkey = regvalue.get_regkey()
                 regkey_attributes = {}
-                associated_object_dict = { 'id' : self.generator.generate_object_id() }
                 split_regkey = regkey.split('\\')
                 regkey_attributes['hive'] = split_regkey[0].lstrip()
                 actual_key = ''
@@ -678,6 +677,8 @@ class parser:
                 regvalues_collection = regvalue.get_regvalues_collection()
                 value_list = []
                 for regvalue in regvalues_collection.get_regvalue():
+                    associated_object_dict = { 'id' : self.generator.generate_object_id() }
+                    
                     data = regvalue.get_contents()
                     if data is not None and data.startswith("\"") and data.endswith("\""):
                         data = data[1:-1]  # strip quotes and whitespace
@@ -733,7 +734,7 @@ class parser:
                 port_attributes = {}
                 associated_object_dict = { 'id' : self.generator.generate_object_id() }
                 port_attributes['xsi:type'] = 'PortObjectType'
-                port_attributes['port_value'] = { 'value' : open_port.get_port_number(), 'force_datatype' : True }
+                port_attributes['port_value'] = { 'value' : open_port.get_port_number() }
                 port_attributes['layer4_protocol'] = { 'value' : open_port.get_protocol(), 'datatype' : 'string', 'force_datatype' : True }
                 
                 associated_object_dict['properties'] = port_attributes
@@ -803,7 +804,7 @@ class parser:
 
             port_attributes = {}
             port_attributes['xsi:type'] = 'PortObjectType'
-            port_attributes['port_value'] = { 'value' : connect_ip.get_port_number(), 'force_datatype' : True }
+            port_attributes['port_value'] = { 'value' : connect_ip.get_port_number() }
             second_associated_object_dict['properties'] = port_attributes
             second_associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
 
@@ -820,14 +821,14 @@ class parser:
             
             url_attributes = {}
             url_attributes['xsi:type'] = 'URIObjectType'
-            url_attributes['value'] = {'value' : internetconnect.get_server(), 'force_datatype' : True } 
+            url_attributes['value'] = {'value' : internetconnect.get_server() } 
             
             first_associated_object_dict['properties'] = url_attributes
             first_associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
             
             port_attributes = {}
             port_attributes['xsi:type'] = 'PortObjectType'
-            port_attributes['port_value'] = { 'value' : internetconnect.get_port_number(), 'force_datatype' : True }
+            port_attributes['port_value'] = { 'value' : internetconnect.get_port_number() }
             
             second_associated_object_dict['properties'] = port_attributes
             second_associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
@@ -852,7 +853,7 @@ class parser:
                     request_attributes['http_request_header'] = { 'parsed_header' : {
                                                                 'host' : {
                                                                     'domain_name' : { 'value' : internetconnect.get_server(), 'force_datatype' : True },
-                                                                    'port' : { 'port_value' : { 'value' : 80, 'force_datatype' : True }, 'xsi:type' : 'PortObjectType' }
+                                                                    'port' : { 'port_value' : { 'value' : 80 }, 'xsi:type' : 'PortObjectType' }
                                                                 }             
                                                             }}
                     session_attributes['xsi:type'] = 'HTTPSessionObjectType'
@@ -875,7 +876,7 @@ class parser:
             url_attributes = {}
             associated_object_dict = { 'id' : self.generator.generate_object_id() }
             url_attributes['xsi:type'] = 'URIObjectType'
-            url_attributes['value'] = { 'value' : url, 'force_datatype' : True }
+            url_attributes['value'] = { 'value' : url }
             
             associated_object_dict['properties'] = url_attributes
             associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
@@ -903,7 +904,7 @@ class parser:
                 url_string = url.get_url()
                 filename = url.get_filename()
                 file_attributes['xsi:type'] = 'FileObjectType'
-                file_attributes['file_path'] = { 'value' : filename, 'force_datatype' : True }
+                file_attributes['file_path'] = { 'value' : filename }
                 
                 first_associated_object_dict['properties'] = file_attributes
                 first_associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
@@ -974,7 +975,7 @@ class parser:
         for procname in procnames.get_procname():
             process_attributes = {}
             process_attributes['xsi:type'] = "ProcessObjectType"
-            process_attributes['name'] = { 'value' : procname, 'force_datatype' : True }
+            process_attributes['name'] = { 'value' : procname }
             associated_object_dict = { 'id' : self.generator.generate_object_id() }
             associated_object_dict['properties'] = process_attributes
             associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
