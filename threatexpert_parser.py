@@ -5,7 +5,6 @@
 
 #ThreatExpert main parser class
 #For use in extracting data from XML ThreatExpert output
-from maec.utils import MAECNamespaceParser
 from maec.bundle.bundle import Bundle
 from maec.bundle.malware_action import MalwareAction
 from maec.bundle.av_classification import AVClassification, AVClassifications
