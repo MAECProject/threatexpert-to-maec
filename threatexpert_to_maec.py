@@ -41,15 +41,15 @@ def create_maec(inputfile, outpath, verbose_error_mode):
             #Parse the file to get the actions and processes
             parser.parse_document()
     
-            #Create the MAEC bundle
-            package = Package(parser.generator.generate_package_id())
+            #Create the MAEC Package
+            package = Package()
             
             #Add the analysis
             for subject in parser.maec_subjects:
                 package.add_malware_subject(subject)
   
             #Finally, Export the results
-            package.to_xml_file(outpath)
+            package.to_xml_file(outpath, {"https://github.com/MAECProject/threatexpert-to-maec":"ThreatExpertToMAEC"})
             
             print "Wrote to " + outpath
             
