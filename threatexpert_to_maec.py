@@ -13,10 +13,9 @@
 #For more information, please refer to the terms.txt file.
 
 #ThreatExpert Converter Script
-#Copyright 2012, MITRE Corp
+#Copyright 2014, MITRE Corp
 #Andrew Sillers & Ivan Kirillov, MITRE
 #v0.95 - BETA
-#Generates valid MAEC v4.1/CybOX v2.1 draft content
 
 import threatexpert_parser as teparser
 from maec.package.package import Package
