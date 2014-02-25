@@ -14,7 +14,6 @@
 
 #ThreatExpert Converter Script
 #Copyright 2014, MITRE Corp
-#Andrew Sillers & Ivan Kirillov, MITRE
 #v0.95 - BETA
 
 import threatexpert_parser as teparser
