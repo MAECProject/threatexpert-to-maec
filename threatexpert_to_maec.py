@@ -1,10 +1,10 @@
-#****************************************************
-#
-#      ThreatExpert -> MAEC XML Converter Script
-#
-#      Copyright (c) 2014 - The MITRE Corporation
-#
-#****************************************************
+#****************************************************#
+#                                                    #
+#      ThreatExpert -> MAEC XML Converter Script     #
+#                                                    #
+#      Copyright (c) 2014 - The MITRE Corporation    #
+#                                                    #
+#****************************************************#
 
 #BY USING THE THREATEXPERT TO MAEC SCRIPT, YOU SIGNIFY YOUR ACCEPTANCE OF THE TERMS AND 
 #CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE THREATEXPERT
@@ -15,6 +15,7 @@
 #ThreatExpert Converter Script
 #Copyright 2014, MITRE Corp
 #v0.95 - BETA
+#Updated 02/24/2014 for MAEC v4.1 and CybOX v2.1
 
 import threatexpert_parser as teparser
 from maec.package.package import Package
