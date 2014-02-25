@@ -1,10 +1,10 @@
-#****************************************************
-#
-#      ThreatExpert -> MAEC XML Converter Script
-#
-#      Copyright (c) 2013 - The MITRE Corporation
-#
-#****************************************************
+#****************************************************#
+#                                                    #
+#      ThreatExpert -> MAEC XML Converter Script     #
+#                                                    #
+#      Copyright (c) 2014 - The MITRE Corporation    #
+#                                                    #
+#****************************************************#
 
 #BY USING THE THREATEXPERT TO MAEC SCRIPT, YOU SIGNIFY YOUR ACCEPTANCE OF THE TERMS AND 
 #CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE THREATEXPERT
@@ -13,10 +13,9 @@
 #For more information, please refer to the terms.txt file.
 
 #ThreatExpert Converter Script
-#Copyright 2012, MITRE Corp
-#Andrew Sillers & Ivan Kirillov, MITRE
-#v0.94 - BETA
-#Generates valid MAEC v4.0.1/CybOX v2.0.1 draft content
+#Copyright 2014, MITRE Corp
+#v0.95 - BETA
+#Updated 02/24/2014 for MAEC v4.1 and CybOX v2.1
 
 import threatexpert_parser as teparser
 from maec.package.package import Package
@@ -41,15 +40,15 @@ def create_maec(inputfile, outpath, verbose_error_mode):
             #Parse the file to get the actions and processes
             parser.parse_document()
     
-            #Create the MAEC bundle
-            package = Package(parser.generator.generate_package_id())
+            #Create the MAEC Package
+            package = Package()
             
             #Add the analysis
             for subject in parser.maec_subjects:
                 package.add_malware_subject(subject)
   
             #Finally, Export the results
-            package.to_xml_file(outpath)
+            package.to_xml_file(outpath, {"https://github.com/MAECProject/threatexpert-to-maec":"ThreatExpertToMAEC"})
             
             print "Wrote to " + outpath
             
@@ -68,7 +67,7 @@ def usage():
     
 USAGE_TEXT = """
 ThreatExpert XML Output --> MAEC XML Converter Utility
-v0.94 BETA // Supports MAEC v4.0.1 and CybOX v2.0.1
+v0.95 BETA // Supports MAEC v4.1 and CybOX v2.1
 
 Usage: python threatexpert_to_maec.py <special arguments> -i <input threatexpert xml output> -o <output maec xml file> 
        OR python threatexpert_to_maec.py <special arguments> -d <directory>
