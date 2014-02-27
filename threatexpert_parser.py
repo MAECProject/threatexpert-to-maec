@@ -518,7 +518,7 @@ class parser:
                 module_attributes['path'] = module.get_module_filename()
                 module_attributes['type'] = 'Dynamic'
                 associated_object_dict['properties'] = module_attributes
-                associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
+                associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
                 
                 #Generate the MAEC action
                 action_attributes = {}
@@ -589,8 +589,7 @@ class parser:
                 driver_attributes = {}
                 driver_attributes['xsi:type'] = 'WindowsDriverObjectType'
                 driver_attributes['driver_name'] = added_driver.driver_name
-                driver_attributes['custom_properties'] = [{'name' : 'Driver_File_Path',
-                                                           'value' : added_driver.driver_filename }]
+                driver_attributes['file_path'] = added_driver.driver_filename 
                 
                 associated_object_dict['properties'] = driver_attributes
                 associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
