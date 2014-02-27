@@ -731,7 +731,7 @@ class parser:
                 port_attributes['layer4_protocol'] = { 'value' : open_port.get_protocol(), 'datatype' : 'string', 'force_datatype' : True }
                 
                 associated_object_dict['properties'] = port_attributes
-                associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
+                associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
                 
                 #Generate the MAEC action
                 action_attributes = {}
@@ -934,7 +934,7 @@ class parser:
             hook_attributes['hooked_function'] = windowshook.export
                 
             associated_object_dict['properties'] = hook_attributes
-            associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
+            associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
                 
             action_attributes = {}
             action_attributes['id'] = maec.utils.idgen.create_id(prefix="action")
