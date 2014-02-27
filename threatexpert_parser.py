@@ -728,7 +728,7 @@ class parser:
                 associated_object_dict = { 'id' : maec.utils.idgen.create_id(prefix="object") }
                 port_attributes['xsi:type'] = 'PortObjectType'
                 port_attributes['port_value'] = { 'value' : open_port.get_port_number() }
-                port_attributes['layer4_protocol'] = { 'value' : open_port.get_protocol(), 'datatype' : 'string', 'force_datatype' : True }
+                port_attributes['layer4_protocol'] = { 'value' : open_port.get_protocol(), 'datatype' : 'string'}
                 
                 associated_object_dict['properties'] = port_attributes
                 associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
@@ -759,7 +759,7 @@ class parser:
                 action_attributes['name'] = {'value' : 'get host by address', 'xsi:type' : 'maecVocabs:SocketActionNameVocab-1.0'}
             else:
                 host_attributes['xsi:type'] = 'URIObjectType'
-                host_attributes['value'] = { 'value' : host, 'force_datatype' : True }
+                host_attributes['value'] = { 'value' : host}
                 action_attributes['name'] = {'value' : 'get host by name', 'xsi:type' : 'maecVocabs:SocketActionNameVocab-1.0'}
 
             associated_object_dict['properties'] = host_attributes
@@ -791,7 +791,7 @@ class parser:
                 action_attributes['name'] = {'value' : 'connect to ip', 'xsi:type' : 'maecVocabs:NetworkActionNameVocab-1.0'}
             else:
                 ip_attributes['xsi:type'] = 'URIObjectType'
-                ip_attributes['value'] = { 'value' : connect_ip.get_ip(), 'force_datatype' : True }
+                ip_attributes['value'] = { 'value' : connect_ip.get_ip()}
                 action_attributes['name'] = {'value' : 'connect to url', 'xsi:type' : 'maecVocabs:NetworkActionNameVocab-1.0'}
             first_associated_object_dict['properties'] = ip_attributes
 
@@ -842,10 +842,10 @@ class parser:
                     session_attributes = {}
                     request_attributes = {}
                     associated_object_dict = { 'id' : maec.utils.idgen.create_id(prefix="object") }
-                    request_attributes['http_request_line'] = { 'http_method' : { 'value' : 'GET', 'force_datatype' : True }, 'value' : request }
+                    request_attributes['http_request_line'] = { 'http_method' : { 'value' : 'GET'}, 'value' : request }
                     request_attributes['http_request_header'] = { 'parsed_header' : {
                                                                 'host' : {
-                                                                    'domain_name' : { 'value' : internetconnect.get_server(), 'force_datatype' : True },
+                                                                    'domain_name' : { 'value' : internetconnect.get_server() },
                                                                     'port' : { 'port_value' : { 'value' : 80 }, 'xsi:type' : 'PortObjectType' }
                                                                 }             
                                                             }}
@@ -904,7 +904,7 @@ class parser:
                 
                 
                 url_attributes['xsi:type'] = 'URIObjectType'
-                url_attributes['value'] = { 'value' : url_string, 'force_datatype' : True }
+                url_attributes['value'] = { 'value' : url_string}
                 
                 second_associated_object_dict['properties'] = url_attributes
                 second_associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
@@ -950,9 +950,9 @@ class parser:
             associated_object_dict = { 'id' : maec.utils.idgen.create_id(prefix="object") }
             
             share_attributes['xsi:type'] = 'WindowsNetworkShareObjectType'
-            share_attributes['netname'] = { 'value' : wnetaddconnection.remote_name, 'force_datatype' : True }
-            share_attributes['local_path'] = { 'value' : wnetaddconnection.local_name, 'force_datatype' : True }
-            share_attributes['type'] = { 'value' : wnetaddconnection.resource_type, 'force_datatype' : True }
+            share_attributes['netname'] = { 'value' : wnetaddconnection.remote_name}
+            share_attributes['local_path'] = { 'value' : wnetaddconnection.local_name}
+            share_attributes['type'] = { 'value' : wnetaddconnection.resource_type}
             associated_object_dict['properties'] = share_attributes
             associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
             
