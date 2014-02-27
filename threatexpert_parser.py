@@ -191,7 +191,7 @@ class parser:
             pe_imports = []
             for loaded_dll in dll_dependencies.get_loaded_dll():
                 pe_import = {}
-                pe_import[file_name] = loaded_dll.get_full_name()
+                pe_import['file_name'] = loaded_dll.get_full_name()
                 pe_import['virtual_address'] = loaded_dll.get_base_address().lstrip('0x')
                 pe_import['delay_load'] = not bool(int(loaded_dll.get_is_load_time_dependency()))
                 pe_imports.append(pe_import)
@@ -267,21 +267,13 @@ class parser:
         if techdetails.get_added_hidden_streams() is not None: self.__process_added_files_type(techdetails.get_added_hidden_streams(),'stream')
         if techdetails.get_deleted_files() is not None: self.__process_filenames_notes_type(techdetails.get_deleted_files(), 'delete')
         if techdetails.get_modified_files() is not None: self.__process_filenames_notes_type(techdetails.get_modified_files(), 'modify')
-        #Revisit - CybOX does not currently support directories
-        #if techdetails.get_added_directories() is not None: self.__process_dirnames_notes_type(techdetails.get_added_directories(), 'create')
-        #if techdetails.get_added_hidden_directories() is not None: self.__process_dirnames_notes_type(techdetails.get_added_hidden_directories(), 'create')
-        #if techdetails.get_deleted_directories() is not None: self.__process_dirnames_notes_type(techdetails.get_deleted_directories(), 'create')
         if techdetails.get_added_processes() is not None: self.__process_added_processes_type(techdetails.get_added_processes())
         if techdetails.get_added_hidden_processes() is not None: self.__process_added_hidden_processes_type(techdetails.get_added_hidden_processes())
         if techdetails.get_injected_mempages() is not None: self.__process_injected_mempages_type(techdetails.get_injected_mempages())
-        #Revisit - determine what this means and how to represent it in CybOX
-        #if techdetails.get_added_modules() is not None: self.__process_added_modules_type(techdetails.get_added_modules())
         if techdetails.get_added_services() is not None: self.__process_added_services_type(techdetails.get_added_services())
         if techdetails.get_modified_services() is not None: self.__process_modified_services_type(techdetails.get_modified_services())
         if techdetails.get_added_drivers() is not None: self.__process_added_drivers_type(techdetails.get_added_drivers())
         if techdetails.get_added_syscallhooks() is not None: self.__process_added_syscallhooks_type(techdetails.get_added_syscallhooks())
-        #Revisit - CybOX does not currently support IRP hooks
-        #if techdetails.get_irp_hooks() is not None: self.__process_irp_hooks(techdetails.get_irp_hooks())
         if techdetails.get_added_regkeys() is not None: self.__process_regkeys_type(techdetails.get_added_regkeys(), 'create')
         if techdetails.get_added_hidden_regkeys() is not None: self.__process_regkeys_type(techdetails.get_added_hidden_regkeys(), 'create')
         if techdetails.get_deleted_regkeys() is not None: self.__process_regkeys_type(techdetails.get_deleted_regkeys(), 'delete')
