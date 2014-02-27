@@ -389,20 +389,19 @@ class parser:
             for dirname in dirnames_collection.get_dirname():
                 dir_attributes = {}
                 associated_object_dict = { 'id' : maec.utils.idgen.create_id(prefix="object") }
-                file_attributes['xsi:type'] = "FileObjectType"
+                dir_attributes['xsi:type'] = "FileObjectType"
                 dir_attributes['file_path'] = { 'value' : dirname }
                 
                 associated_object_dict['properties'] = dir_attibutes
-                associated_object_dict['association_type'] = 'Affected'
-                
                 #Generate the MAEC action
                 action_attributes = {}
                 action_attributes['id'] = maec.utils.idgen.create_id(prefix="action")
                 if type == 'create':
                     action_attributes['name'] = {'value' : 'create directory', 'xsi:type' : 'maecVocabs:DirectoryActionNameVocab-1.0'}
+                    associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
                 elif type == 'delete':
                     action_attributes['name'] = {'value' : 'delete directory', 'xsi:type' : 'maecVocabs:DirectoryActionNameVocab-1.0'}
-                action_attributes['tool_id'] = self.tool_id
+                    associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
                 action_attributes['associated_objects'] = [associated_object_dict]
                 fs_action = self.maec_action.create_action(action_attributes)
                 self.actions.get('File Actions').append(fs_action)
