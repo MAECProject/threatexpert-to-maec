@@ -130,7 +130,7 @@ class parser:
             
             malware_subject.add_findings_bundle(self.bundle_obj)
             
-            malware_subject.analyses[0].set_findings_bundle(self.bundle_obj.id)
+            malware_subject.analyses[0].set_findings_bundle(self.bundle_obj.id_)
             
             self.maec_subjects.append(malware_subject)
             
@@ -392,7 +392,7 @@ class parser:
                 dir_attributes['xsi:type'] = "FileObjectType"
                 dir_attributes['file_path'] = { 'value' : dirname }
                 
-                associated_object_dict['properties'] = dir_attibutes
+                associated_object_dict['properties'] = dir_attributes
                 #Generate the MAEC action
                 action_attributes = {}
                 action_attributes['id'] = maec.utils.idgen.create_id(prefix="action")
