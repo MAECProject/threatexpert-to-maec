@@ -130,7 +130,7 @@ class parser:
             
             malware_subject.add_findings_bundle(self.bundle_obj)
             
-            malware_subject.analyses[0].set_findings_bundle(self.bundle_obj.id)
+            malware_subject.analyses[0].set_findings_bundle(self.bundle_obj.id_)
             
             self.maec_subjects.append(malware_subject)
             
@@ -198,11 +198,11 @@ class parser:
             if pe_imports.hasContent_():
                 pe_attributes['imports'] = pe_imports
             if pe_attributes.hasContent_():
-                file_object['pe_attributes'] = pe_attributes
+                file_dict['pe_attributes'] = pe_attributes
         
         # create the analysis and add it to the subject
         analysis = Analysis()
-        analysis.type = 'triage'
+        analysis.type_ = 'triage'
         analysis.method = 'dynamic'
         analysis.add_tool(ToolInformation.from_dict({'id' : maec.utils.idgen.create_id(prefix="tool"),
                            'vendor' : 'ThreatExpert',
@@ -392,7 +392,7 @@ class parser:
                 dir_attributes['xsi:type'] = "FileObjectType"
                 dir_attributes['file_path'] = { 'value' : dirname }
                 
-                associated_object_dict['properties'] = dir_attibutes
+                associated_object_dict['properties'] = dir_attributes
                 #Generate the MAEC action
                 action_attributes = {}
                 action_attributes['id'] = maec.utils.idgen.create_id(prefix="action")
@@ -1019,4 +1019,3 @@ class parser:
                 av_classification_object = { 'classification_name' : object.get_alias_ahnlab(), 'vendor' : 'AhnLab' }
                 av_classification_objects.append(av_classification_object)
         return av_classification_objects
-        
