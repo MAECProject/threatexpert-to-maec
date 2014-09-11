@@ -10,7 +10,7 @@
 #CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE THREATEXPERT
 #TO MAEC SCRIPT.
 
-#For more information, please refer to the terms.txt file.
+#For more information, please refer to the LICENSE.txt file.
 
 #ThreatExpert Converter Script
 #Copyright 2014, MITRE Corp
