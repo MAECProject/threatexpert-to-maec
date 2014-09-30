@@ -58,6 +58,16 @@ class parser:
         except Exception, err:
            print('\nError: %s\n' % str(err))
            return 0
+       
+    #Read-in the ThreatExpert output contents
+    #This assumes that we're dealing with XML
+    def use_input_string(self, input_string):
+        try: 
+            self.report_object = threatexpert.parseString(input_string)
+            return 1
+        except Exception, err:
+           print('\nError: %s\n' % str(err))
+           return 0
 
     #Parse the XML document
     #Extract processes, actions, and information about the analysis subject

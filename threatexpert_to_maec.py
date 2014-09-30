@@ -17,8 +17,7 @@
 #v0.95 - BETA
 #Updated 02/24/2014 for MAEC v4.1 and CybOX v2.1
 
-import threatexpert_parser as teparser
-from maec.package.package import Package
+from __init__ import generate_package_from_report_filepath
 import sys
 import os
 import traceback
@@ -27,25 +26,10 @@ import traceback
 def create_maec(inputfile, outpath, verbose_error_mode):
     stat_actions = 0
 
-    if os.path.isfile(inputfile):    
-        #Create the main parser object
-        parser = teparser.parser()
+    if os.path.isfile(inputfile):
+        
         try:
-            open_file = parser.open_file(inputfile)
-            
-            if not open_file:
-                print('\nError: Error in parsing input file. Please check to ensure that it is valid XML and conforms to the ThreatExpert output schema.')
-                return
-            
-            #Parse the file to get the actions and processes
-            parser.parse_document()
-    
-            #Create the MAEC Package
-            package = Package()
-            
-            #Add the analysis
-            for subject in parser.maec_subjects:
-                package.add_malware_subject(subject)
+            package = generate_package_from_report_filepath(inputfile)
   
             #Finally, Export the results
             package.to_xml_file(outpath, {"https://github.com/MAECProject/threatexpert-to-maec":"ThreatExpertToMAEC"})
