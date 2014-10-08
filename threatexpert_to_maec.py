@@ -17,19 +17,20 @@
 #v0.95 - BETA
 #Updated 02/24/2014 for MAEC v4.1 and CybOX v2.1
 
-from __init__ import generate_package_from_report_filepath
+from threatexpert_to_maec import generate_package_from_report_filepath
 import sys
 import os
 import traceback
+from maec.misc.options import ScriptOptions
 
 #Create a MAEC output file from a ThreatExpert input file
-def create_maec(inputfile, outpath, verbose_error_mode):
+def create_maec(inputfile, outpath, verbose_error_mode, options):
     stat_actions = 0
 
     if os.path.isfile(inputfile):
         
         try:
-            package = generate_package_from_report_filepath(inputfile)
+            package = generate_package_from_report_filepath(inputfile, options)
   
             #Finally, Export the results
             package.to_xml_file(outpath, {"https://github.com/MAECProject/threatexpert-to-maec":"ThreatExpertToMAEC"})
@@ -61,6 +62,7 @@ Special arguments are as follows (all are optional):
 
 """    
 def main():
+    options = ScriptOptions()
     verbose_error_mode = 0
     infilename = ''
     outfilename = ''
@@ -82,6 +84,12 @@ def main():
             outfilename = args[i+1]
         elif args[i] == '-d':
             directoryname = args[i+1]
+        elif args[i] == '--dedup':
+            options.deduplicate_bundles = True
+        elif args[i] == '--deref':
+            options.dereference_bundles = True
+        elif args[i] == '--normalize':
+            options.normalize_bundles = True
 
     if directoryname != '':
         for filename in os.listdir(directoryname):
@@ -89,10 +97,10 @@ def main():
                 pass
             else:
                 outfilename = filename.rstrip('.xml') + '_maec.xml'
-                create_maec(os.path.join(directoryname, filename), outfilename, verbose_error_mode)
+                create_maec(os.path.join(directoryname, filename), outfilename, verbose_error_mode, options)
     #Basic input file checking
     elif infilename != '' and outfilename != '':
-        create_maec(infilename, outfilename, verbose_error_mode)
+        create_maec(infilename, outfilename, verbose_error_mode, options)
         
 if __name__ == "__main__":
     main()    
