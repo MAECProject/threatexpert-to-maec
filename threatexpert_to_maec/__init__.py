@@ -1,6 +1,8 @@
 import threatexpert_parser as teparser
 from maec.package.package import Package
 
+___version__ = "0.0.0.1"
+
 proxies = {}
     
 def generate_package_from_report_filepath(input_path, options = None):
