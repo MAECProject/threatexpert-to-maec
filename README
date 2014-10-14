@@ -15,8 +15,8 @@ For more information, please refer to the LICENSE.txt file.
 #Generates MAEC Package Output from a ThreatExpert XML file     #
 #Compatible with MAEC Schema v4.1 & CybOX 2.1                   #
 #                                                               #
-#v0.96 - BETA                                                   #
-#Updated 02/13/2014                                             #
+#v0.97 - BETA                                                   #
+#Updated 10/14/2014                                             #
 #                                                               #
 #################################################################
 # MAEC - http://maec.mitre.org                                  #
@@ -27,10 +27,13 @@ For more information, please refer to the LICENSE.txt file.
 
 README: this file.
 threatexpert_to_maec.py: the ThreatExpert XML to MAEC XML Python converter script.
+LICENSE.txt: the terms of use for this script.
+
+threatexpert_to_maec/: package for transforming ThreatExpert reports to MAEC
+                       and fetching reports from threatexpert.com
 threatexpert.py: the ThreatExpert Python bindings, which the script imports.
 threatexpert_parser.py: the ThreatExpert to MAEC parser class, which does most
-of the work.
-LICENSE.txt: the terms of use for this script.
+                        of the work.
 --------------------------------------------------------------------------------
 --Dependencies------------------------------------------------------------------
 This code has been developed and tested under Python 2.7.x and so may not

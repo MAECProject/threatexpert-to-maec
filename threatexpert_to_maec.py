@@ -14,8 +14,8 @@
 
 #ThreatExpert Converter Script
 #Copyright 2014, MITRE Corp
-#v0.95 - BETA
-#Updated 02/24/2014 for MAEC v4.1 and CybOX v2.1
+#v0.97 - BETA
+#Updated 10/14/2014 for MAEC v4.1 and CybOX v2.1
 
 from threatexpert_to_maec import generate_package_from_report_filepath
 import sys
@@ -65,9 +65,6 @@ Flags:
 
 """    
 def main():
-
-    outfilename = ''
-    parser = argparse.ArgumentParser()
     parser = argparse.ArgumentParser(description="ThreatExpert to MAEC Translator")
     parser.add_argument("input", help="the name of the input ThreatExpert XML file OR directory of files to translate to MAEC")
     parser.add_argument("output", help="the name of the MAEC XML file OR directory to which the output will be written")
