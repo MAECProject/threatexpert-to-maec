@@ -43,19 +43,21 @@ There are three dependencies for this script:
 --------------------------------------------------------------------------------
 --Usage Notes-------------------------------------------------------------------
 
-There are three main command line parameters for this script:
+The input ThreatExpert file or directory should be specified as the first argument, and the output file or directory should be specified as the second argument.
 
--i: the path to the input ThreatExpert XML file
+The script also supports the following optional command line parameters:
 
--o: the path to the output MAEC XML file
+--deduplicate, -dd: deduplicate objects in MAEC output
 
-There is an additional, optional parameter that may be specified before the main parameters:
+--dereference, -dr: dereference the MAEC output
 
--v: print verbose error output (tracebacks)
+--normalize, -n: normalize the MAEC output
+
+--verbose, -v: print verbose error output (tracebacks)
 
 To use the script, run the following command:
 
-python threatexpert_to_maec.py -i <threatexpert_xml_file> -o <maec_xml_file>
+python threatexpert_to_maec.py <input ThreatExpert file/dir> <output MAEC file/dir> <flags>
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
