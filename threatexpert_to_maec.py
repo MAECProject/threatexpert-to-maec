@@ -46,24 +46,6 @@ def create_maec(inputfile, outpath, verbose_error_mode, options):
         print('\nError: Input file not found or inaccessible.')
         return
 
-#Print the usage text    
-def usage():
-    print USAGE_TEXT
-    sys.exit(1)
-    
-USAGE_TEXT = """
-ThreatExpert XML Output --> MAEC XML Converter Utility
-v0.96 BETA // Supports MAEC v4.1 and CybOX v2.1
-
-Usage: python threatexpert_to_maec.py <input threatexpert xml output> <output maec xml file> <flags>
-
-Flags:
---deduplicate, -dd: flag to deduplicate objects in MAEC output
---dereference, -dr: flag to dereference the MAEC output
---normalize, -n: flag to normalize the MAEC output
---verbose, -v: print verbose error output (tracebacks)
-
-"""    
 def main():
     parser = argparse.ArgumentParser(description="ThreatExpert to MAEC Translator")
     parser.add_argument("input", help="the name of the input ThreatExpert XML file OR directory of files to translate to MAEC")
