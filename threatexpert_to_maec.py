@@ -34,7 +34,7 @@ def create_maec(inputfile, outpath, verbose_error_mode, options):
             package = generate_package_from_report_filepath(inputfile, options)
   
             #Finally, Export the results
-            package.to_xml_file(outpath, {"https://github.com/MAECProject/threatexpert-to-maec":"ThreatExpertToMAEC"})
+            package.to_xml_file(outpath)
             
             print "Wrote to " + outpath
             
