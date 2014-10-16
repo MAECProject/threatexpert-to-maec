@@ -6,7 +6,7 @@ __version__ = "0.97"
 proxies = {}
     
 def generate_package_from_report_filepath(input_path, options = None):
-    "Take a file path to a ThreatExpert report and return a MAEC package object"
+    """Take a file path to a ThreatExpert report and return a MAEC package object."""
     parser = teparser.parser()
     open_file = parser.open_file(input_path)
     
@@ -17,7 +17,8 @@ def generate_package_from_report_filepath(input_path, options = None):
     return generate_package_from_parser(parser)
 
 def generate_package_from_binary_filepath(input_path, options = None):
-    "Take a file path to a binary file, try to look up its ThreatExpert report by MD5, and return a MAEC package object if a report is found"
+    """Take a file path to a binary file, try to look up its ThreatExpert report by MD5, 
+	   and return a MAEC package object if a report is found."""
     import hashlib
     # create MD5
     blocksize = 65536
@@ -31,7 +32,8 @@ def generate_package_from_binary_filepath(input_path, options = None):
     return generate_package_from_md5(hasher.hexdigest())
 
 def generate_package_from_md5(input_md5, options = None):
-    "Take an MD5 string, try to look up its ThreatExpert report, and return a MAEC package object if a report is found"
+    """Take an MD5 string, try to look up its ThreatExpert report, 
+	and return a MAEC package object if a report is found."""
     global proxies
     import requests
     parameters = { "md5": input_md5, "xml": 1 }
@@ -40,14 +42,14 @@ def generate_package_from_md5(input_md5, options = None):
     return generate_package_from_report_string(response.content)
 
 def generate_package_from_report_string(input_string, options = None):
-    "Take a ThreatExpert report as a string and return a MAEC package object"
+    """Take a ThreatExpert report as a string and return a MAEC package object."""
     parser = teparser.parser()
     parser.use_input_string(input_string)
     
     return generate_package_from_parser(parser)
 
 def generate_package_from_parser(input_parser, options = None):
-    "Take a populated ThreatExpert parser object and return a MAEC package object"
+    """Take a populated ThreatExpert parser object and return a MAEC package object."""
     # Parse the file to get the actions and processes
     input_parser.parse_document()
 
@@ -73,7 +75,9 @@ def generate_package_from_parser(input_parser, options = None):
     return package
 
 def set_proxies(proxy_dict={}):
-    "Take a dictionary of proxies to use for network fetches, where keys are protocol names and values are proxy addresses; e.g., { 'http':'http://example.com:80', ... }"
+    """Take a dictionary of proxies to use for network fetches, 
+	where keys are protocol names and values are proxy addresses; 
+	e.g., { 'http':'http://example.com:80' }."""
     global proxies
     proxies = proxy_dict
     
