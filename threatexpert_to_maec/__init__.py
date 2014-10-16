@@ -48,13 +48,16 @@ def generate_package_from_report_string(input_string, options = None):
 
 def generate_package_from_parser(input_parser, options = None):
     "Take a populated ThreatExpert parser object and return a MAEC package object"
-    #Parse the file to get the actions and processes
+    # Parse the file to get the actions and processes
     input_parser.parse_document()
 
-    #Create the MAEC Package
+    # Create the MAEC Package
     package = Package()
+
+    # Add the namespace to the package
+    package.__input_namespaces__["https://github.com/MAECProject/threatexpert-to-maec"] = "ThreatExpertToMAEC"
     
-    #Add the analysis
+    # Add the analysis
     for malware_subject in input_parser.maec_subjects:
         
         if options:
