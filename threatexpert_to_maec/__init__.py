@@ -14,7 +14,7 @@ def generate_package_from_report_filepath(input_path, options = None):
         print('\nError: Error in parsing input file. Please check to ensure that it is valid XML and conforms to the ThreatExpert output schema.')
         return
     
-    return generate_package_from_parser(parser)
+    return generate_package_from_parser(parser, options)
 
 def generate_package_from_binary_filepath(input_path, options = None):
     """Take a file path to a binary file, try to look up its ThreatExpert report by MD5, 
@@ -29,7 +29,7 @@ def generate_package_from_binary_filepath(input_path, options = None):
         hasher.update(buf)
         buf = fd.read(blocksize)
     
-    return generate_package_from_md5(hasher.hexdigest())
+    return generate_package_from_md5(hasher.hexdigest(), options)
 
 def generate_package_from_md5(input_md5, options = None):
     """Take an MD5 string, try to look up its ThreatExpert report, 
@@ -39,14 +39,14 @@ def generate_package_from_md5(input_md5, options = None):
     parameters = { "md5": input_md5, "xml": 1 }
     response = requests.get("http://threatexpert.com/report.aspx", params=parameters, proxies=proxies)
     
-    return generate_package_from_report_string(response.content)
+    return generate_package_from_report_string(response.content, options)
 
 def generate_package_from_report_string(input_string, options = None):
     """Take a ThreatExpert report as a string and return a MAEC package object."""
     parser = teparser.parser()
     parser.use_input_string(input_string)
     
-    return generate_package_from_parser(parser)
+    return generate_package_from_parser(parser, options)
 
 def generate_package_from_parser(input_parser, options = None):
     """Take a populated ThreatExpert parser object and return a MAEC package object."""
