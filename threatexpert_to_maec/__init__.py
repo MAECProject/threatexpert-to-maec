@@ -1,3 +1,6 @@
+# Copyright (c) 2014, The MITRE Corporation. All rights reserved.
+# For more information, please refer to the LICENSE.txt file.
+
 import threatexpert_parser as teparser
 from maec.package.package import Package
 
