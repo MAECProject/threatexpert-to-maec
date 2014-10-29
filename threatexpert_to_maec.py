@@ -83,6 +83,8 @@ def main():
                 continue
             outfilename = str(filename)[:-4] + "_maec.xml"
             create_maec(os.path.join(args.input, filename), os.path.join(args.output, outfilename), args.verbose, options)
+    else:
+        print "Input file " + args.input + " does not exist"
         
 if __name__ == "__main__":
     main()    
