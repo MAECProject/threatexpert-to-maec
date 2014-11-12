@@ -37,7 +37,7 @@ def create_maec(inputfile, outpath, verbose_error_mode, options):
             options_dict["Created by"] = "ThreatExpert-to-MAEC (http://github.com/MAECProject/threatexpert-to-maec)"
   
             #Finally, Export the results
-            package.to_xml_file(outpath, options_used=options_dict)
+            package.to_xml_file(outpath, custom_header=options_dict)
             
             package.to_xml
             
