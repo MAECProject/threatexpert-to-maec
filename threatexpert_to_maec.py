@@ -39,8 +39,6 @@ def create_maec(inputfile, outpath, verbose_error_mode, options):
             #Finally, Export the results
             package.to_xml_file(outpath, custom_header=options_dict)
             
-            package.to_xml
-            
             print "Wrote to " + outpath
             
         except Exception, err:

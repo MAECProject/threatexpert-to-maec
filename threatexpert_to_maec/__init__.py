@@ -53,8 +53,12 @@ def generate_package_from_report_string(input_string, options = None):
 
 def generate_package_from_parser(input_parser, options = None):
     """Take a populated ThreatExpert parser object and return a MAEC package object."""
-    # Parse the file to get the actions and processes
-    input_parser.parse_document()
+    
+    try:
+        # Parse the file to get the actions and processes
+        input_parser.parse_document()
+    except:
+        raise Exception("Fetched document is not a valid ThreatExpert report; this file has never been reported to ThreatExpert")
 
     # Create the MAEC Package
     package = Package()
