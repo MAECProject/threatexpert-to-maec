@@ -41,8 +41,8 @@ be compatible with Python 3.x.
 
 There are three dependencies for this script:
 1) The Python lxml library  >= 3.2.x, http://lxml.de/
-2) The python-maec library  >= v4.1.0.7: https://pypi.python.org/pypi/maec
-3) The python-cybox library >= v2.1.0.6: https://pypi.python.org/pypi/cybox
+2) The python-maec library  >= v4.1.0.9: https://pypi.python.org/pypi/maec
+3) The python-cybox library >= v2.1.0.8: https://pypi.python.org/pypi/cybox
 --------------------------------------------------------------------------------
 --Usage Notes-------------------------------------------------------------------
 
