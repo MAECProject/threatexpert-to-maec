@@ -1,14 +1,13 @@
 # Copyright (c) 2014, The MITRE Corporation. All rights reserved.
 # For more information, please refer to the LICENSE.txt file.
-
 import threatexpert_parser as teparser
 from maec.package.package import Package
 
-__version__ = "0.97"
+__version__ = "0.98"
 
 proxies = {}
     
-def generate_package_from_report_filepath(input_path, options = None):
+def generate_package_from_report_filepath(input_path, options=None):
     """Take a file path to a ThreatExpert report and return a MAEC package object."""
     parser = teparser.parser()
     open_file = parser.open_file(input_path)
@@ -17,9 +16,9 @@ def generate_package_from_report_filepath(input_path, options = None):
         print('\nError: Error in parsing input file. Please check to ensure that it is valid XML and conforms to the ThreatExpert output schema.')
         return
     
-    return generate_package_from_parser(parser, options)
+    return generate_package_from_parser(parser, options, False)
 
-def generate_package_from_binary_filepath(input_path, options = None):
+def generate_package_from_binary_filepath(input_path, options=None):
     """Take a file path to a binary file, try to look up its ThreatExpert report by MD5, 
 	   and return a MAEC package object if a report is found."""
     import hashlib
@@ -34,7 +33,7 @@ def generate_package_from_binary_filepath(input_path, options = None):
     
     return generate_package_from_md5(hasher.hexdigest(), options)
 
-def generate_package_from_md5(input_md5, options = None):
+def generate_package_from_md5(input_md5, options=None):
     """Take an MD5 string, try to look up its ThreatExpert report, 
 	and return a MAEC package object if a report is found."""
     global proxies
@@ -42,23 +41,26 @@ def generate_package_from_md5(input_md5, options = None):
     parameters = { "md5": input_md5, "xml": 1 }
     response = requests.get("http://threatexpert.com/report.aspx", params=parameters, proxies=proxies)
     
-    return generate_package_from_report_string(response.content, options)
+    return generate_package_from_report_string(response.content, options, True)
 
-def generate_package_from_report_string(input_string, options = None):
+def generate_package_from_report_string(input_string, options=None, from_md5=False):
     """Take a ThreatExpert report as a string and return a MAEC package object."""
     parser = teparser.parser()
     parser.use_input_string(input_string)
     
-    return generate_package_from_parser(parser, options)
+    return generate_package_from_parser(parser, options, from_md5)
 
-def generate_package_from_parser(input_parser, options = None):
+def generate_package_from_parser(input_parser, options=None, from_md5=False):
     """Take a populated ThreatExpert parser object and return a MAEC package object."""
     
     try:
         # Parse the file to get the actions and processes
         input_parser.parse_document()
     except:
-        raise Exception("Fetched document is not a valid ThreatExpert report; this file has never been reported to ThreatExpert")
+        if from_md5:
+            raise Exception("Fetched document is not a valid ThreatExpert report. It is likely that this file has never been reported to ThreatExpert.")
+        else:
+            raise Exception("Input document is not a valid ThreatExpert report.")
 
     # Create the MAEC Package
     package = Package()
