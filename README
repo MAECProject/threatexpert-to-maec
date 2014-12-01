@@ -15,8 +15,8 @@ For more information, please refer to the LICENSE.txt file.
 #Generates MAEC Package Output from a ThreatExpert XML file     #
 #Compatible with MAEC Schema v4.1 & CybOX 2.1                   #
 #                                                               #
-#v0.97 - BETA                                                   #
-#Updated 10/14/2014                                             #
+#v0.98 - BETA                                                   #
+#Updated 12/01/2014                                             #
 #                                                               #
 #################################################################
 # MAEC - http://maec.mitre.org                                  #
