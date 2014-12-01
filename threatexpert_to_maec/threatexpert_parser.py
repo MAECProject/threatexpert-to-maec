@@ -24,24 +24,12 @@ import re
 class parser:
     
     def __init__(self):
-        #array for storing actions
-        #the subject of the analysis (typically a PE binary)
-        self.analysis_subject_md5 = ''
-        self.analysis_subject_sha1 = ''
-        #variable for keeping tab on the number of actions we parsed out
-        self.number_of_actions = 0
         #the report object of the ThreatExpert XML document
         self.report_object = None
         self.actions = None
         #the actions for the current subreport
         self.subreport_actions = None
-        self.maec_object = None
-        self.maec_action = None
-        self.maec_actions = {}
-        self.maec_objects = {}
-        self.maec_behaviors = {}
         self.maec_subjects = []
-        self.analysis_subject_md5 = None
         self.analysis_subject_path = None
         self.analysis_subject_name = None
         self.subject_id_list = []
@@ -243,9 +231,6 @@ class parser:
     def get_analysis_subject(self):
         return self.analysis_subject
 
-    def get_number_of_actions(self):
-        return self.number_of_actions
-        
     #"Private" methods
     #Create and instantiate the keys in the action dictionary
     def __setup_action_dictionary(self):
@@ -346,6 +331,7 @@ class parser:
                     associated_object_dict = {}                    
                     if 'sample #1]' in filename:
                         associated_object_dict['idref'] = self.subject_id_list[0]
+                        associated_object_dict['association_type'] = {'value' : 'output', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
                     else:
                         associated_object_dict['id'] = maec.utils.idgen.create_id(prefix="object") 
                         fully_qualified = True
@@ -413,7 +399,7 @@ class parser:
                     action_attributes['name'] = {'value' : 'delete directory', 'xsi:type' : 'maecVocabs:DirectoryActionNameVocab-1.0'}
                     associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
                 action_attributes['associated_objects'] = [associated_object_dict]
-                fs_action = self.maec_action.create_action(action_attributes)
+                fs_action = MalwareAction.from_dict(action_attributes)
                 self.actions.get('File Actions').append(fs_action)
                 self.subreport_actions.append(fs_action.id_)
 
