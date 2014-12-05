@@ -5,22 +5,21 @@ Copyright (c) 2014 - The MITRE Corporation
 
 BY USING THE THREATEXPERT TO MAEC SCRIPT, YOU SIGNIFY YOUR ACCEPTANCE OF THE TERMS AND 
 CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE SCRIPT.
-
 For more information, please refer to the LICENSE.txt file.
-
-Compatible with MAEC Schema v4.1 & CybOX 2.1
 
 v0.98 - BETA
 
 Updated 12/01/2014
 
-* MAEC - http://maec.mitre.org
-* ThreatExpert - http://www.threatexpert.com
-
 Overview
 --------
 
 The software has two components: a stand-alone module (in ``threatexpert_to_maec/``) and a command-line script that uses the module (``threatexpert_parser.py``). The software generates a MAEC Package from a ThreatExpert XML file. The module can also accept an MD5 hash of a known binary file, which it uses to query the ``threatexpert.com`` server to fetch the report for the binary.
+
+Compatible with MAEC Schema v4.1 & CybOX 2.1
+
+* MAEC - http://maec.mitre.org
+* ThreatExpert - http://www.threatexpert.com
 
 Included Files
 --------------
