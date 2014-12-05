@@ -33,11 +33,11 @@ Included Files
 
 * ``threatexpert_to_maec/``: package for transforming ThreatExpert reports to MAEC and fetching reports from threatexpert.com
 
- - ``__init__.py`` - defines the module functions, see "Module Usage" below
+  - ``__init__.py`` - defines the module functions, see "Module Usage" below
 
- - ``threatexpert.py``: the ThreatExpert XML-to-Python bindings
+  - ``threatexpert.py``: the ThreatExpert XML-to-Python bindings
 
- - ``threatexpert_parser.py``: the ThreatExpert to MAEC parser class, which does most of the conversion work.
+  - ``threatexpert_parser.py``: the ThreatExpert to MAEC parser class, which does most of the conversion work.
 
 Dependencies
 ------------
@@ -46,9 +46,9 @@ This code has been developed and tested under Python 2.7.x and so may not be com
 
 There are three dependencies for this script:
 
-  1. The Python ``lxml`` library  >= 3.2.x, http://lxml.de/
-  2. The ``python-maec`` library  >= v4.1.0.9: https://pypi.python.org/pypi/maec
-  3. The ``python-cybox`` library >= v2.1.0.8: https://pypi.python.org/pypi/cybox
+1. The Python ``lxml`` library  >= 3.2.x, http://lxml.de/
+2. The ``python-maec`` library  >= v4.1.0.9: https://pypi.python.org/pypi/maec
+3. The ``python-cybox`` library >= v2.1.0.8: https://pypi.python.org/pypi/cybox
 
 Script Usage
 ------------
