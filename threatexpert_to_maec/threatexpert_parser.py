@@ -265,7 +265,7 @@ class parser:
         #Revisit - CybOX does not currently support directories
         if techdetails.get_added_directories() is not None: self.__process_dirnames_notes_type(techdetails.get_added_directories(), 'create')
         if techdetails.get_added_hidden_directories() is not None: self.__process_dirnames_notes_type(techdetails.get_added_hidden_directories(), 'create')
-        if techdetails.get_deleted_directories() is not None: self.__process_dirnames_notes_type(techdetails.get_deleted_directories(), 'create')
+        if techdetails.get_deleted_directories() is not None: self.__process_dirnames_notes_type(techdetails.get_deleted_directories(), 'delete')
         if techdetails.get_added_processes() is not None: self.__process_added_processes_type(techdetails.get_added_processes())
         if techdetails.get_added_hidden_processes() is not None: self.__process_added_hidden_processes_type(techdetails.get_added_hidden_processes())
         if techdetails.get_injected_mempages() is not None: self.__process_injected_mempages_type(techdetails.get_injected_mempages())
