@@ -421,7 +421,6 @@ class parser:
                 if process.get_process_filename() == '[file and pathname of the sample #1]':
                     if self.analysis_subject_path is not None:
                         process_attributes['image_info']['path'] = { 'value' : self.analysis_subject_path + '\\' + self.analysis_subject_name }
-                        process_attributes['image_info']['file_name'] = { 'value' : self.analysis_subject_name }
                     else:
                         # HACK: we need to refer to the unnamed malware analysis subject,
                         # HACK: but there is no way for a Process element to refer to a File element (only file *names*)
@@ -562,7 +561,7 @@ class parser:
                     service_attributes['xsi:type'] = 'WindowsServiceObjectType'
                     service_attributes['service_name'] = service.get_service_name()
                     service_attributes['display_name'] = service.get_display_name()
-                    service_attributes['image_info'] = {'file_name' : service.get_service_filename() }
+                    service_attributes['image_info'] = {'path' : service.get_service_filename() }
                     service_attributes['status'] = service.get_status()
                 except AttributeError:
                     pass
