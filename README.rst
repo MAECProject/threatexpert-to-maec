@@ -1,15 +1,15 @@
 ThreatExpert XML -> MAEC XML Converter Script
 =============================================
 
-Copyright (c) 2014 - The MITRE Corporation
+Copyright (c) 2015 - The MITRE Corporation
 
 BY USING THE THREATEXPERT TO MAEC SCRIPT, YOU SIGNIFY YOUR ACCEPTANCE OF THE TERMS AND 
 CONDITIONS OF USE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE THE SCRIPT.
 For more information, please refer to the LICENSE.txt file.
 
-v0.98 - BETA
+v0.99 - BETA
 
-Updated 12/01/2014
+Updated 02/10/2014
 
 Overview
 --------

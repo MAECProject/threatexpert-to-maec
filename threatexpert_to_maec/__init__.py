@@ -3,7 +3,7 @@
 import threatexpert_parser as teparser
 from maec.package.package import Package
 
-__version__ = "0.98"
+__version__ = "0.99"
 
 proxies = {}
     
