@@ -753,7 +753,7 @@ class parser:
                     host_attributes['category'] = 'ipv4-addr'
                 action_attributes['name'] = {'value' : 'get host by address', 'xsi:type' : 'maecVocabs:SocketActionNameVocab-1.0'}
             else:
-                host_attributes['xsi:type'] = 'URIObjectType'
+                host_attributes['xsi:type'] = 'DomainNameObjectType'
                 host_attributes['value'] = { 'value' : host}
                 action_attributes['name'] = {'value' : 'get host by name', 'xsi:type' : 'maecVocabs:SocketActionNameVocab-1.0'}
 
