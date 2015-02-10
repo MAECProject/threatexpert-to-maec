@@ -788,6 +788,7 @@ class parser:
             else:
                 ip_attributes['xsi:type'] = 'URIObjectType'
                 ip_attributes['value'] = { 'value' : connect_ip.get_ip()}
+                ip_attributes['type'] = 'URL'
                 action_attributes['name'] = {'value' : 'connect to url', 'xsi:type' : 'maecVocabs:NetworkActionNameVocab-1.0'}
             first_associated_object_dict['properties'] = ip_attributes
 
@@ -811,7 +812,8 @@ class parser:
             url_attributes = {}
             url_attributes['xsi:type'] = 'URIObjectType'
             url_attributes['value'] = {'value' : internetconnect.get_server() } 
-            
+            url_attributes['type'] = 'URL'
+
             first_associated_object_dict['properties'] = url_attributes
             first_associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
             
@@ -866,7 +868,8 @@ class parser:
             associated_object_dict = { 'id' : maec.utils.idgen.create_id(prefix="object") }
             url_attributes['xsi:type'] = 'URIObjectType'
             url_attributes['value'] = { 'value' : url }
-            
+            url_attributes['type'] = 'URL'
+
             associated_object_dict['properties'] = url_attributes
             associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
             
@@ -901,7 +904,8 @@ class parser:
                 
                 url_attributes['xsi:type'] = 'URIObjectType'
                 url_attributes['value'] = { 'value' : url_string}
-                
+                url_attributes['type'] = 'URL'
+
                 second_associated_object_dict['properties'] = url_attributes
                 second_associated_object_dict['association_type'] = {'value' : 'input', 'xsi:type' : 'maecVocabs:ActionObjectAssociationTypeVocab-1.0'}
                 
