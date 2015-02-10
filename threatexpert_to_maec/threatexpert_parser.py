@@ -533,7 +533,7 @@ class parser:
                 service_attributes = {}
                 try:
                     service_attributes['xsi:type'] = 'WindowsServiceObjectType'
-                    service_attributes['name'] = service.get_service_name()
+                    service_attributes['service_name'] = service.get_service_name()
                     service_attributes['display_name'] = service.get_display_name()
                     service_attributes['image_info'] = {'path' : service.get_service_filename() }
                     service_attributes['status'] = service.get_status()
@@ -560,7 +560,7 @@ class parser:
                 associated_object_dict = { 'id' : maec.utils.idgen.create_id(prefix="object") }
                 try:
                     service_attributes['xsi:type'] = 'WindowsServiceObjectType'
-                    service_attributes['name'] = service.get_service_name()
+                    service_attributes['service_name'] = service.get_service_name()
                     service_attributes['display_name'] = service.get_display_name()
                     service_attributes['image_info'] = {'file_name' : service.get_service_filename() }
                     service_attributes['status'] = service.get_status()
