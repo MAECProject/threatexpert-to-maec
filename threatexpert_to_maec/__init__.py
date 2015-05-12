@@ -66,7 +66,7 @@ def generate_package_from_parser(input_parser, options=None, from_md5=False):
     package = Package()
 
     # Add the namespace to the package
-    package.__input_namespaces__["https://github.com/MAECProject/threatexpert-to-maec"] = "ThreatExpertToMAEC"
+    package.__input_namespaces__["ThreatExpertToMAEC"] = "https://github.com/MAECProject/threatexpert-to-maec"
     
     # Add the analysis
     for malware_subject in input_parser.maec_subjects:
