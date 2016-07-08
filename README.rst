@@ -16,7 +16,7 @@ Overview
 
 The software has two components: a stand-alone module (in ``threatexpert_to_maec/``) and a command-line script that uses the module (``threatexpert_parser.py``). The software generates a MAEC Package from a ThreatExpert XML file. The module can also accept an MD5 hash of a known binary file, which it uses to query the ``threatexpert.com`` server to fetch the report for the binary.
 
-Compatible with MAEC Schema v4.1 & Cyber Observable eXpression (CybOX™) 2.1.
+Compatible with MAEC Schema v4.1 and Cyber Observable eXpression (CybOX™) 2.1.
 
 * MAEC - http://maecproject.github.io/
 * ThreatExpert - http://www.threatexpert.com
@@ -91,11 +91,11 @@ Malware Attribute Enumeration and Characterization (MAEC™) is a standardized l
 
 The goal of the MAEC (pronounced "mike") effort is to provide a basis for transforming malware research and response. MAEC aims to eliminate the ambiguity and inaccuracy that currently exists in malware descriptions and to reduce reliance on signatures. In this way, MAEC seeks to improve human-to-human, human-to-tool, tool-to-tool, and tool-to-human communication about malware; reduce potential duplication of malware analysis efforts by researchers; and allow for the faster development of countermeasures by enabling the ability to leverage responses to previously observed malware instances. The MAEC Language enables correlation, integration, and automation.
 
-Please visit the MAEC website at http://maecproject.github.io/ for more information about the MAEC Language.
+Please visit the `MAEC website <https://maecproject.github.io/>`_ for more information about the MAEC Language.
 
 Getting Help
 ------------
 
-Join the public MAEC Community Email Discussion List at https://maec.mitre.org/community/discussionlist.html.
+Join the public `MAEC Community Email Discussion List <https://maec.mitre.org/community/discussionlist.html>`_.
 
 Email the MAEC Developers at maec@mitre.org.
